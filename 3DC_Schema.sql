@@ -8,6 +8,7 @@ create table pushup_workout_goal(
    workoutgoal_id integer primary key autoincrement,
    user_id integer not null,
    numberofpushups integer not null,
+   startdate datetime not null,
    foreign key(user_id) references application_user(user_id)
 );
    
