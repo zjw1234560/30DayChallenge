@@ -1,14 +1,22 @@
+create table user(
+	user_id integer primary key not null,
+	email text not null
+);
+
 create table pushup_workout_goal(
    workoutgoal_id integer primary key autoincrement,
+   user_id integer not null,
    numberofpushups integer not null,
-   startdate datetime not null
+   foreign key(user_id) references user(user_id)
 );
    
 create table run_workout_goal(
    	workoutgoal_id integer primary key autoincrement,
+   	user_id integer not null,
    	workoutgoal_time integer not null,
    	workoutgoal_distance integer not null,
-   	startdate datetime not null
+   	startdate datetime not null,
+   	foreign key(user_id) references user(user_id)
 );
 
 create table pushup_session(
