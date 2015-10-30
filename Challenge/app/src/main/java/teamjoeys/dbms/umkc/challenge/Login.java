@@ -8,6 +8,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.TextView;
+
+//this is the login screen for the challenge app
+//the login uses email and password, followed by a log in button for execution
+
 
 public class Login extends ActionBarActivity implements View.OnClickListener {
 
@@ -46,8 +53,13 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
         //pass login information to server and get response if login should proceed
         switch (v.getId()) {
             case R.id.login_exe: {
-                Intent intent = new Intent(this,Challenge_Menu.class);
-                //pass username on to next activity for updating challenge day
+                Intent intent = new Intent(this, Challenge_Menu.class);
+                EditText email = (EditText) findViewById(R.id.email);
+                EditText pswrd = (EditText) findViewById(R.id.password);
+                String user_email = email.getText().toString();
+                String user_pswrd = pswrd.getText().toString();
+                //pass username and password
+                //ok? then start activity
                 startActivity(intent);
             }
         }

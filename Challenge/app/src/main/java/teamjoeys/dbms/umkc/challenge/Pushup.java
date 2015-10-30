@@ -11,6 +11,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
+//this is the push up feature
+//it displays the push up goal and the count for the current session
+
+
 public class Pushup extends ActionBarActivity implements View.OnClickListener {
 
 
@@ -22,24 +26,21 @@ public class Pushup extends ActionBarActivity implements View.OnClickListener {
         setContentView(R.layout.activity_pushup);
         View L_button = findViewById(R.id.pushup_button);
         L_button.setOnClickListener(this);
+        View F_button = findViewById(R.id.finish_button);
+        F_button.setOnClickListener(this);
         update_count();
+        update_goal();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_home, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -49,20 +50,30 @@ public class Pushup extends ActionBarActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.pushup_button: {
+        if (v.getId() == R.id.pushup_button) {
                 count+=1;
                 update_count();
             }
-        }
+        if (v.getId() == R.id.finish_button){
+                //send info for push up session to database
+                Intent intent = new Intent(this, Challenge_Menu.class);
+                startActivity(intent);
+            }
     }
+
 
     private void update_count(){
         TextView t = (TextView) findViewById(R.id.pu_counter);
         t.setText(Integer.toString(count));
     }
+
+    private void update_goal(){
+        TextView t = (TextView) findViewById(R.id.pu_goal);
+        //Get info from database on goal for the day
+        t.setText(Integer.toString(count));
+    }
 }
 
 
-//add finish button/count to end session
-//send/get # of pushups to server
+
+

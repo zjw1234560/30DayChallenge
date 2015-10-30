@@ -9,6 +9,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+//this is the first screen that appears in the challenge app
+//it has a link to an about page with info for the app and a button to log in
+
 public class Home extends ActionBarActivity implements View.OnClickListener {
 
     @Override

@@ -21,7 +21,29 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Count"
         android:id="@+id/pu_counter"
+        android:layout_marginTop="83dp"
         android:layout_below="@+id/pushup_button"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="75dp" />
+        android:layout_alignLeft="@+id/pushup_button"
+        android:layout_alignStart="@+id/pushup_button" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Goal"
+        android:id="@+id/pu_goal"
+        android:layout_marginBottom="36dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/pu_counter"
+        android:layout_alignStart="@+id/pu_counter" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/end"
+        android:id="@+id/finish_button"
+        android:layout_below="@+id/pu_counter"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

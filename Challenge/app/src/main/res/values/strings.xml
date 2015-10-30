@@ -11,7 +11,8 @@
     <string name="title_activity_login">Login</string>
     <string name="title_activity_pushup">Push Up</string>
     <string name="pushup">Push Up</string>
-    <string name="title_activity_challenge__menu">Challenge_Menu</string>
+    <string name="title_activity_challenge__menu">Challenge Menu</string>
     <string name="pacer">Pacer Run</string>
     <string name="day">Challenge Progress:</string>
+    <string name="end">Finish</string>
 </resources>

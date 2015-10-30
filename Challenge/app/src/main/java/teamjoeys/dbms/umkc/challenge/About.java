@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+//the about screen simply contains information about the app
+
 public class About extends AppCompatActivity {
 
     @Override

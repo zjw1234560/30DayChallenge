@@ -10,6 +10,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
+//this is the main menu for users that appears after they successfully log in.
+//the menu displays a run goal and a push up goal along with the progress they have made
+//the method update challenge is used to communicate with database
+
+
+
 public class Challenge_Menu extends ActionBarActivity implements View.OnClickListener {
 
     private int count = 0;
@@ -20,7 +26,7 @@ public class Challenge_Menu extends ActionBarActivity implements View.OnClickLis
         View spu_button = findViewById(R.id.start_pu);
         spu_button.setOnClickListener(this);
         //this is where we would get challenge progress from database
-        update_count();
+        update_challenge();
     }
 
     @Override
@@ -55,9 +61,13 @@ public class Challenge_Menu extends ActionBarActivity implements View.OnClickLis
         }
     }
 
-    private void update_count(){
-        //read in the data from database about which day/progress made in challenge
-        TextView t = (TextView) findViewById(R.id.challenge_progress);
-        t.setText(Integer.toString(count));
+    private void update_challenge(){
+        //read in the data from database about which progress/goals made in challenge
+        TextView t = (TextView) findViewById(R.id.day);
+        t.setText("Day: " + Integer.toString(count));
+        TextView v = (TextView) findViewById(R.id.pu_goal);
+        v.setText("Push Up Goal");
+        TextView tv = (TextView) findViewById(R.id.run_goal);
+        tv.setText("Run Goal");
     }
 }
