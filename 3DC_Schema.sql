@@ -1,6 +1,7 @@
 create table user(
 	user_id integer primary key not null,
-	email text not null
+	email text not null,
+	password text not null
 );
 
 create table pushup_workout_goal(
