@@ -2,21 +2,18 @@ package teamjoeys.dbms.umkc.challenge;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.TextView;
 
 //this is the login screen for the challenge app
 //the login uses email and password, followed by a log in button for execution
 
-
 public class Login extends ActionBarActivity implements View.OnClickListener {
+
+    private ChallengeDatabase mDb = new ChallengeDatabase(getApplicationContext());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,12 +52,9 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
             case R.id.login_exe: {
                 Intent intent = new Intent(this, Challenge_Menu.class);
                 EditText email = (EditText) findViewById(R.id.email);
-                EditText pswrd = (EditText) findViewById(R.id.password);
+                EditText password = (EditText) findViewById(R.id.password);
                 String user_email = email.getText().toString();
-                String user_pswrd = pswrd.getText().toString();
-                //pass username and password
-                //ok? then start activity
-                startActivity(intent);
+                String user_password = password.getText().toString();
             }
         }
     }
