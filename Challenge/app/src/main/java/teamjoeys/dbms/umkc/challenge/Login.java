@@ -1,5 +1,6 @@
 package teamjoeys.dbms.umkc.challenge;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -13,7 +14,8 @@ import android.widget.EditText;
 
 public class Login extends ActionBarActivity implements View.OnClickListener {
 
-    private ChallengeDatabase mDb = new ChallengeDatabase(getApplicationContext());
+    private ChallengeDatabase mDb;
+    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +23,8 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
         setContentView(R.layout.activity_login);
         View L_button = findViewById(R.id.login_exe);
         L_button.setOnClickListener(this);
+        mContext = this;
+        mDb = new ChallengeDatabase(mContext);
     }
 
     @Override
@@ -55,6 +59,18 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
                 EditText password = (EditText) findViewById(R.id.password);
                 String user_email = email.getText().toString();
                 String user_password = password.getText().toString();
+                int user_id = mDb.FindUser(user_email, user_password);
+                if (user_id == -1) {
+                    // Alert user can't be found
+                    startActivity(intent);
+                }
+                else {
+                    startActivity(intent);
+                }
+            }
+
+            case R.id.create_exe: {
+                //mDb.CreateUser(email, pw);
             }
         }
     }
