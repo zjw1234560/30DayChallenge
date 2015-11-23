@@ -45,6 +45,8 @@ public class Challenge_Menu extends ActionBarActivity implements View.OnClickLis
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(this,About.class);
+            startActivity(intent);
             return true;
         }
 

@@ -15,4 +15,8 @@
     <string name="pacer">Pacer Run</string>
     <string name="day">Challenge Progress:</string>
     <string name="end">Finish</string>
+    <string name="tutor">Push Up Tutorial</string>
+    <string name="title_activity_pushup_tutorial">Pushup Tutorial</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>

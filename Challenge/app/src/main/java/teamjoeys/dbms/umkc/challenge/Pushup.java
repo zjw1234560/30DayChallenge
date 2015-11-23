@@ -34,7 +34,7 @@ public class Pushup extends ActionBarActivity implements View.OnClickListener {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_home, menu);
+        getMenuInflater().inflate(R.menu.menu_pushup, menu);
         return true;
     }
 
@@ -42,6 +42,8 @@ public class Pushup extends ActionBarActivity implements View.OnClickListener {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(this, Pushup_tutorial.class);
+            startActivity(intent);
             return true;
         }
 

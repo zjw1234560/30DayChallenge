@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 //this is the login screen for the challenge app
 //the login uses email and password, followed by a log in button for execution
@@ -23,6 +24,9 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
         setContentView(R.layout.activity_login);
         View L_button = findViewById(R.id.login_exe);
         L_button.setOnClickListener(this);
+        View C_button = findViewById(R.id.create_exe);
+        C_button.setOnClickListener(this);
+
         mContext = this;
         mDb = new ChallengeDatabase(mContext);
     }
@@ -43,6 +47,8 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(this,About.class);
+            startActivity(intent);
             return true;
         }
 
@@ -54,23 +60,36 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
         //pass login information to server and get response if login should proceed
         switch (v.getId()) {
             case R.id.login_exe: {
-                Intent intent = new Intent(this, Challenge_Menu.class);
                 EditText email = (EditText) findViewById(R.id.email);
                 EditText password = (EditText) findViewById(R.id.password);
                 String user_email = email.getText().toString();
                 String user_password = password.getText().toString();
                 int user_id = mDb.FindUser(user_email, user_password);
                 if (user_id == -1) {
-                    // Alert user can't be found
+                    String text = "Account Info Incorrect";
+                    // Use a toast message to tell user account info wasn't found
+                    Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
+                    toast.show();
+                    Intent intent = new Intent(this, Challenge_Menu.class);
                     startActivity(intent);
                 }
                 else {
+                    String text = "Login Successful!";
+                    // Use a toast message to tell user login was success
+                    Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
+                    toast.show();
+                    Intent intent = new Intent(this, Challenge_Menu.class);
                     startActivity(intent);
                 }
             }
-
             case R.id.create_exe: {
                 //mDb.CreateUser(email, pw);
+                String text = "Account Created!";
+                // Use a toast message to tell user account creation was successful
+                Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
+                toast.show();
+                Intent intent = new Intent(this, Challenge_Menu.class);
+                startActivity(intent);
             }
         }
     }
