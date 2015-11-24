@@ -32,6 +32,14 @@
             android:name=".Challenge_Menu"
             android:label="@string/title_activity_challenge__menu" >
         </activity>
+        <activity
+            android:name=".Pushup_tutorial"
+            android:label="@string/title_activity_pushup_tutorial" >
+        </activity>
+        <activity
+            android:name=".PacerRunActivity"
+            android:label="@string/title_activity_pacer_run" >
+        </activity>
     </application>
 
 </manifest>

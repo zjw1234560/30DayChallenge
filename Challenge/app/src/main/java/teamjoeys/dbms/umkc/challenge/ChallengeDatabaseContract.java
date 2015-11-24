@@ -16,6 +16,8 @@ public final class ChallengeDatabaseContract {
             RunSession.SQL_CREATE_TABLE + "\n" +
             RunTimestamp.SQL_CREATE_TABLE;
 
+    public static final String CREATE_DEFAULT_USER = "INSERT INTO application_user VALUES(55, 'hello@there', 'pw54');";
+
     public static abstract class ApplicationUser implements BaseColumns {
         public static final String TABLE_NAME = "application_user";
         public static final String COLUMN_NAME_USER_ID = "user_id";
