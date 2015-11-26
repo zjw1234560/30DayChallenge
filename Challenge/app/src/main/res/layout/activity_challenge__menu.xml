@@ -38,21 +38,53 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="push up goal"
+        android:text="Personal Best/Push Up Goal:"
         android:id="@+id/pu_goal"
         android:layout_marginTop="42dp"
         android:layout_below="@+id/day"
-        android:layout_toLeftOf="@+id/start_pu"
-        android:layout_toStartOf="@+id/start_pu" />
+        android:layout_toStartOf="@+id/start_pacer"
+        android:textSize="17dp"
+        android:layout_toLeftOf="@+id/start_pacer" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="running goal"
+        android:text="Personal Best/Running Goal:"
         android:id="@+id/run_goal"
         android:layout_alignTop="@+id/pu_goal"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textSize="17dp"
+        android:textIsSelectable="true"
         android:layout_toRightOf="@+id/start_pacer"
         android:layout_toEndOf="@+id/start_pacer" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="0/0"
+        android:id="@+id/pushBestGoal"
+        android:layout_below="@+id/pu_goal"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="36dp"
+        android:layout_marginStart="36dp"
+        android:textSize="17dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="0/0"
+        android:id="@+id/runBestGoal"
+        android:layout_below="@+id/run_goal"
+        android:layout_alignLeft="@+id/run_goal"
+        android:layout_alignStart="@+id/run_goal"
+        android:layout_marginLeft="43dp"
+        android:layout_marginStart="43dp"
+        android:textIsSelectable="false"
+        android:textSize="17dp" />
 
 </RelativeLayout>

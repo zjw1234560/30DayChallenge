@@ -1,6 +1,7 @@
 package teamjoeys.dbms.umkc.challenge;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
+import teamjoeys.dbms.umkc.challenge.ChallengeDatabase;
 
 //this is the main menu for users that appears after they successfully log in.
 //the menu displays a run goal and a push up goal along with the progress they have made
@@ -73,11 +75,25 @@ public class Challenge_Menu extends ActionBarActivity implements View.OnClickLis
 
     private void update_challenge(){
         //read in the data from database about which progress/goals made in challenge
-        TextView t = (TextView) findViewById(R.id.day);
-        t.setText("Day: " + Integer.toString(count));
-        TextView v = (TextView) findViewById(R.id.pu_goal);
-        v.setText("Push Up Goal");
-        TextView tv = (TextView) findViewById(R.id.run_goal);
-        tv.setText("Run Goal");
+        setBestGoalText();
+
     }
+
+    private void setBestGoalText ()
+    {
+        TextView vValue = (TextView) findViewById(R.id.pushBestGoal);
+        vValue.setText(ChallengeDatabase.findPushUpPersonalBest()+"/"+ChallengeDatabase.findPushUpPersonalGoal());
+        if (ChallengeDatabase.findPushUpPersonalBest()>=ChallengeDatabase.findPushUpPersonalGoal())
+        {
+            vValue.setTextColor(Color.GREEN);
+        }
+        TextView tvValue = (TextView) findViewById(R.id.runBestGoal);
+        tvValue.setText(ChallengeDatabase.findRunPersonalBest()+"/"+ChallengeDatabase.findRunPersonalGoal());
+        if (ChallengeDatabase.findRunPersonalBest()>=ChallengeDatabase.findRunPersonalGoal())
+        {
+            tvValue.setTextColor(Color.GREEN);
+        }
+
+    }
+
 }

@@ -12,8 +12,7 @@ import android.database.sqlite.SQLiteException;
 public class ChallengeDatabase {
     private SQLiteDatabase mDbHelper;
 
-    public ChallengeDatabase(Context context)
-    {
+    public ChallengeDatabase(Context context) {
         mDbHelper = new ChallengeDatabaseHelper(context).getWritableDatabase();
     }
 
@@ -26,9 +25,9 @@ public class ChallengeDatabase {
 
         String selection =
                 ChallengeDatabaseContract.ApplicationUser.COLUMN_NAME_EMAIL +
-                " = '" + emailAddress + "' AND " +
-                ChallengeDatabaseContract.ApplicationUser.COLUMN_NAME_PASSWORD +
-                " = '" + password + "'";
+                        " = '" + emailAddress + "' AND " +
+                        ChallengeDatabaseContract.ApplicationUser.COLUMN_NAME_PASSWORD +
+                        " = '" + password + "'";
 
         Cursor c;
 
@@ -41,20 +40,43 @@ public class ChallengeDatabase {
                     null,
                     null,
                     null);
-        }
-        catch(SQLiteException e) {
+        } catch (SQLiteException e) {
             return -1;
         }
 
 
-        if (!(c.moveToFirst()) || c.getCount() ==0){
+        if (!(c.moveToFirst()) || c.getCount() == 0) {
             // user not found
             return -1;
-        }
-        else
-        {
+        } else {
             return c.getInt(c.getColumnIndex(ChallengeDatabaseContract.ApplicationUser.COLUMN_NAME_USER_ID));
         }
+    }
+
+    //traverse database table to retrieve personal best push up record
+    public static int findPushUpPersonalBest()
+    {
+        return 1;
+    }
+
+    //traverse database table to retrieve personal push up goal
+    public static int findPushUpPersonalGoal()
+    {
+        return 2;
+    }
+
+    //traverse database table to retrieve personal best run record. Maybe we should round up
+    //the return value to 1 digit precision
+    public static double findRunPersonalBest()
+    {
+        return 2.2;
+    }
+
+    //traverse database table to retrieve personal best run goal. Maybe we should round up
+    //the return value to 1 digit precision
+    public static double findRunPersonalGoal()
+    {
+        return 2.2;
     }
 
 }
