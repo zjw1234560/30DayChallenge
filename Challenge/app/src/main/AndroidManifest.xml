@@ -38,7 +38,7 @@
         </activity>
         <activity
             android:name=".PacerRunActivity"
-            android:label="@string/title_activity_pacer_run" >
+            android:label="@string/pacer" >
         </activity>
     </application>
 
