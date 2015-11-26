@@ -54,27 +54,27 @@ public class ChallengeDatabase {
     }
 
     //traverse database table to retrieve personal best push up record
-    public static int findPushUpPersonalBest()
+    public static int findPushUpPersonalBest(int userid)
     {
         return 1;
     }
 
     //traverse database table to retrieve personal push up goal
-    public static int findPushUpPersonalGoal()
+    public static int findPushUpPersonalGoal(int userid)
     {
         return 2;
     }
 
     //traverse database table to retrieve personal best run record. Maybe we should round up
     //the return value to 1 digit precision
-    public static double findRunPersonalBest()
+    public static double findRunPersonalBest(int userid)
     {
         return 2.2;
     }
 
     //traverse database table to retrieve personal best run goal. Maybe we should round up
     //the return value to 1 digit precision
-    public static double findRunPersonalGoal()
+    public static double findRunPersonalGoal(int userid)
     {
         return 2.2;
     }

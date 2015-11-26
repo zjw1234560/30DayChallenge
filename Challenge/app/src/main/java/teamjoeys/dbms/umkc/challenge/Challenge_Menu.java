@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
+
 import teamjoeys.dbms.umkc.challenge.ChallengeDatabase;
 
 //this is the main menu for users that appears after they successfully log in.
@@ -17,10 +18,10 @@ import teamjoeys.dbms.umkc.challenge.ChallengeDatabase;
 //the method update challenge is used to communicate with database
 
 
-
 public class Challenge_Menu extends ActionBarActivity implements View.OnClickListener {
 
     private int count = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +50,7 @@ public class Challenge_Menu extends ActionBarActivity implements View.OnClickLis
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent intent = new Intent(this,About.class);
+            Intent intent = new Intent(this, About.class);
             startActivity(intent);
             return true;
         }
@@ -61,36 +62,34 @@ public class Challenge_Menu extends ActionBarActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.start_pu: {
-                Intent intent = new Intent(this,Pushup.class);
+                Intent intent = new Intent(this, Pushup.class);
                 startActivity(intent);
                 break;
             }
             case R.id.start_pacer: {
-                Intent intent = new Intent(this,PacerRunActivity.class);
+                Intent intent = new Intent(this, PacerRunActivity.class);
                 startActivity(intent);
                 break;
             }
         }
     }
 
-    private void update_challenge(){
+    private void update_challenge() {
         //read in the data from database about which progress/goals made in challenge
         setBestGoalText();
-
     }
 
-    private void setBestGoalText ()
-    {
+
+    //retrieve personal best and goal for current userid, turn font to green when goal achieved.
+    private void setBestGoalText() {
         TextView vValue = (TextView) findViewById(R.id.pushBestGoal);
-        vValue.setText(ChallengeDatabase.findPushUpPersonalBest()+"/"+ChallengeDatabase.findPushUpPersonalGoal());
-        if (ChallengeDatabase.findPushUpPersonalBest()>=ChallengeDatabase.findPushUpPersonalGoal())
-        {
+        vValue.setText(ChallengeDatabase.findPushUpPersonalBest(Login.UserId) + "/" + ChallengeDatabase.findPushUpPersonalGoal(Login.UserId));
+        if (ChallengeDatabase.findPushUpPersonalBest(Login.UserId) >= ChallengeDatabase.findPushUpPersonalGoal(Login.UserId)) {
             vValue.setTextColor(Color.GREEN);
         }
         TextView tvValue = (TextView) findViewById(R.id.runBestGoal);
-        tvValue.setText(ChallengeDatabase.findRunPersonalBest()+"/"+ChallengeDatabase.findRunPersonalGoal());
-        if (ChallengeDatabase.findRunPersonalBest()>=ChallengeDatabase.findRunPersonalGoal())
-        {
+        tvValue.setText(ChallengeDatabase.findRunPersonalBest(Login.UserId) + "/" + ChallengeDatabase.findRunPersonalGoal(Login.UserId));
+        if (ChallengeDatabase.findRunPersonalBest(Login.UserId) >= ChallengeDatabase.findRunPersonalGoal(Login.UserId)) {
             tvValue.setTextColor(Color.GREEN);
         }
 

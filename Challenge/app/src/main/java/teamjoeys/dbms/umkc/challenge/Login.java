@@ -17,6 +17,8 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
 
     private ChallengeDatabase mDb;
     private Context mContext;
+    //this static field will be storing the current userId and used in other screens
+    public static int UserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,7 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent intent = new Intent(this,About.class);
+            Intent intent = new Intent(this, About.class);
             startActivity(intent);
             return true;
         }
@@ -72,8 +74,9 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
                     toast.show();
                     Intent intent = new Intent(this, Challenge_Menu.class);
                     startActivity(intent);
-                }
-                else {
+                } else {
+                    //set UserId to current logged in user
+                    UserId = user_id;
                     String text = "Login Successful!";
                     // Use a toast message to tell user login was success
                     Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
@@ -83,7 +86,15 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
                 }
             }
             case R.id.create_exe: {
-                //mDb.CreateUser(email, pw);
+                EditText email = (EditText) findViewById(R.id.email);
+                EditText password = (EditText) findViewById(R.id.password);
+                //uncomment next line when we have the method implemented
+                //mDb.CreateUser(email, password);
+                //set UserId to current logged in user
+                String user_email = email.getText().toString();
+                String user_password = password.getText().toString();
+                int user_id = mDb.FindUser(user_email, user_password);
+                UserId = user_id;
                 String text = "Account Created!";
                 // Use a toast message to tell user account creation was successful
                 Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
