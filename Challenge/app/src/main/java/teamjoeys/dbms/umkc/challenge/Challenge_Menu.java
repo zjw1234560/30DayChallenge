@@ -25,6 +25,8 @@ public class Challenge_Menu extends ActionBarActivity implements View.OnClickLis
         setContentView(R.layout.activity_challenge__menu);
         View spu_button = findViewById(R.id.start_pu);
         spu_button.setOnClickListener(this);
+        View spr_button = findViewById(R.id.start_pacer);
+        spr_button.setOnClickListener(this);
         //this is where we would get challenge progress from database
         update_challenge();
     }
@@ -59,6 +61,12 @@ public class Challenge_Menu extends ActionBarActivity implements View.OnClickLis
             case R.id.start_pu: {
                 Intent intent = new Intent(this,Pushup.class);
                 startActivity(intent);
+                break;
+            }
+            case R.id.start_pacer: {
+                Intent intent = new Intent(this,PacerRunActivity.class);
+                startActivity(intent);
+                break;
             }
         }
     }
