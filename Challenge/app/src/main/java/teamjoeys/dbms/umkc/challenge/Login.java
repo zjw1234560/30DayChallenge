@@ -59,32 +59,24 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        EditText email = (EditText) findViewById(R.id.email);
-        EditText password = (EditText) findViewById(R.id.password);
-
+        //pass login information to server and get response if login should proceed
         switch (v.getId()) {
             case R.id.login_exe: {
+                EditText email = (EditText) findViewById(R.id.email);
+                EditText password = (EditText) findViewById(R.id.password);
                 String user_email = email.getText().toString();
                 String user_password = password.getText().toString();
-
-                // Search DB for user credentials
                 int user_id = mDb.FindUser(user_email, user_password);
-                // If user not found in DB
                 if (user_id == -1) {
                     String text = "Account Info Incorrect";
                     // Use a toast message to tell user account info wasn't found
                     Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
                     toast.show();
-<<<<<<< Updated upstream
                     Intent intent = new Intent(this, Challenge_Menu.class);
                     startActivity(intent);
                 } else {
                     //set UserId to current logged in user
                     UserId = user_id;
-=======
-                }
-                else {
->>>>>>> Stashed changes
                     String text = "Login Successful!";
                     // Use a toast message to tell user login was success
                     Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
@@ -94,7 +86,6 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
                 }
             }
             case R.id.create_exe: {
-<<<<<<< Updated upstream
                 EditText email = (EditText) findViewById(R.id.email);
                 EditText password = (EditText) findViewById(R.id.password);
                 //uncomment next line when we have the method implemented
@@ -110,26 +101,6 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
                 toast.show();
                 Intent intent = new Intent(this, Challenge_Menu.class);
                 startActivity(intent);
-=======
-                String user_email = email.getText().toString();
-                String user_password = password.getText().toString();
-                int user_id_result = mDb.CreateUser(user_email, user_password);
-                if(user_id_result == -1) // If user can't be created
-                {
-                    String text = "Cannot create account with those credentials.";
-                    Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-                else {
-
-                    String text = "Account Created!";
-                    // Use a toast message to tell user account creation was successful
-                    Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
-                    toast.show();
-                    Intent intent = new Intent(this, Challenge_Menu.class);
-                    startActivity(intent);
-                }
->>>>>>> Stashed changes
             }
         }
     }
