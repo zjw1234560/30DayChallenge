@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import android.widget.EditText;
 
 /**
  * Created by Greg on 10/30/2015.
@@ -17,8 +18,8 @@ public class ChallengeDatabase {
     }
 
     // Finds user specified by email address and password, and returns the user id.
+    // Returns -1 if user cannot be found.
     public int FindUser(String emailAddress, String password) {
-
         String[] projection = {
                 ChallengeDatabaseContract.ApplicationUser.COLUMN_NAME_USER_ID
         };
@@ -30,7 +31,6 @@ public class ChallengeDatabase {
                         " = '" + password + "'";
 
         Cursor c;
-
         try {
             c = mDbHelper.query(
                     ChallengeDatabaseContract.ApplicationUser.TABLE_NAME,
@@ -48,11 +48,17 @@ public class ChallengeDatabase {
         if (!(c.moveToFirst()) || c.getCount() == 0) {
             // user not found
             return -1;
+<<<<<<< Updated upstream
         } else {
+=======
+        }
+        else {
+>>>>>>> Stashed changes
             return c.getInt(c.getColumnIndex(ChallengeDatabaseContract.ApplicationUser.COLUMN_NAME_USER_ID));
         }
     }
 
+<<<<<<< Updated upstream
     //traverse database table to retrieve personal best push up record
     public static int findPushUpPersonalBest(int userid)
     {
@@ -79,4 +85,26 @@ public class ChallengeDatabase {
         return 2.2;
     }
 
+=======
+    // Inserts new user into DB
+    // Returns user id of new user, -1 if unsuccessful creation
+    public int CreateUser(String emailAddress, String password) {
+        // INSERT INTO application_user
+        // VALUES(email_box_value, pw_box_value);
+        ContentValues values = new ContentValues();
+        values.put("email", emailAddress);
+        values.put("password", password);
+        long user_id_result = mDbHelper.insert("application_user", null, values);
+        if (user_id_result == -1) {
+            // Unsuccessful
+            mDbHelper.close();
+            return -1;
+        }
+        else
+        {
+            mDbHelper.close();
+            return (int) user_id_result;
+        }
+    }
+>>>>>>> Stashed changes
 }
