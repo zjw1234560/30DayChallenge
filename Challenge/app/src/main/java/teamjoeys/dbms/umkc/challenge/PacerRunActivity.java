@@ -15,7 +15,9 @@ import android.os.SystemClock;
  */
 public class PacerRunActivity extends ActionBarActivity implements View.OnClickListener {
 
+    private double mDistanceRan;
     private Chronometer my_chronometer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,10 +52,18 @@ public class PacerRunActivity extends ActionBarActivity implements View.OnClickL
     public void onClick(View v) {
         if (v.getId() == R.id.start_button) {
             my_chronometer.setBase(SystemClock.elapsedRealtime());
-            my_chronometer.start();
+            my_chronometer.start(); // start timer
+
+            // Every 10 seconds, record new timestamp
+                // distanceBetweenPoints = distance from prev_timestamp to current_timestamp
+                // mDistanceRan += distanceBetweenPoints;
+
+            // set time num label to current_timestamp time
+            // set distance num label to mDistanceRan (make green if goal reached, blue otherwise)
         }
         if (v.getId() == R.id.finish_button){
             my_chronometer.stop();
+
         }
 
     }

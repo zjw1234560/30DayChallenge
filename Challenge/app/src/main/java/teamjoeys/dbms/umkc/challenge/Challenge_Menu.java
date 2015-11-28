@@ -1,17 +1,14 @@
 package teamjoeys.dbms.umkc.challenge;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.TextView;
-
-import teamjoeys.dbms.umkc.challenge.ChallengeDatabase;
 
 //this is the main menu for users that appears after they successfully log in.
 //the menu displays a run goal and a push up goal along with the progress they have made
@@ -21,6 +18,15 @@ import teamjoeys.dbms.umkc.challenge.ChallengeDatabase;
 public class Challenge_Menu extends ActionBarActivity implements View.OnClickListener {
 
     private int count = 0;
+    private ChallengeDatabase mDb;
+    private Context mContext;
+
+    public static int latestPushupGoalId = -1;
+    public static int latestRunGoalId = -1;
+    public static int personalPushupRecord = -1;
+    public static double personalRunRecord = -1;
+    public static int pushupGoalAmt = -1;
+    public static double runGoalAmt = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +36,10 @@ public class Challenge_Menu extends ActionBarActivity implements View.OnClickLis
         spu_button.setOnClickListener(this);
         View spr_button = findViewById(R.id.start_pacer);
         spr_button.setOnClickListener(this);
+
+        mContext = this;
+        mDb = new ChallengeDatabase(mContext);
+
         //this is where we would get challenge progress from database
         update_challenge();
     }
@@ -62,11 +72,15 @@ public class Challenge_Menu extends ActionBarActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.start_pu: {
+                // If pushup goal not set, have user set goal
+
                 Intent intent = new Intent(this, Pushup.class);
                 startActivity(intent);
                 break;
             }
             case R.id.start_pacer: {
+                // If run goal not set, have user set goal
+
                 Intent intent = new Intent(this, PacerRunActivity.class);
                 startActivity(intent);
                 break;
@@ -76,23 +90,52 @@ public class Challenge_Menu extends ActionBarActivity implements View.OnClickLis
 
     private void update_challenge() {
         //read in the data from database about which progress/goals made in challenge
-        setBestGoalText();
-    }
 
+        // Get latest pushup goal, store id
+        int pushupGoalId = mDb.GetLatestPushupGoal(Login.UserId);
+        if (pushupGoalId != -1)
+        {
+            latestPushupGoalId = pushupGoalId;
+            pushupGoalAmt = mDb.GetPushupGoalAmt(latestPushupGoalId);
 
-    //retrieve personal best and goal for current userid, turn font to green when goal achieved.
-    private void setBestGoalText() {
+            // Get personal best from DB
+            int pushupBest = mDb.GetBestPushupSession(Login.UserId, latestPushupGoalId);
+            if (pushupBest != -1)
+            {
+                personalPushupRecord = pushupBest;
+            }
+        }
+        else {
+            // Set text to 'Not Started'
+        }
+        // Get latest run goal, store id
+        int runGoalId = mDb.GetLatestRunGoal(Login.UserId);
+        if (runGoalId != -1)
+        {
+            latestRunGoalId = runGoalId;
+            runGoalAmt = mDb.GetRunGoalAmt(latestRunGoalId);
+
+            // Get personal run best from DB
+            double runBest = mDb.GetBestRunSession(Login.UserId, latestRunGoalId);
+            if (runBest != -1)
+            {
+                personalRunRecord = runBest;
+            }
+        }
+        else {
+            // Set run goal text to 'Not Started'
+        }
+
         TextView vValue = (TextView) findViewById(R.id.pushBestGoal);
-        vValue.setText(ChallengeDatabase.findPushUpPersonalBest(Login.UserId) + "/" + ChallengeDatabase.findPushUpPersonalGoal(Login.UserId));
-        if (ChallengeDatabase.findPushUpPersonalBest(Login.UserId) >= ChallengeDatabase.findPushUpPersonalGoal(Login.UserId)) {
+        vValue.setText(personalPushupRecord + "/" + pushupGoalAmt);
+        if (personalPushupRecord >= pushupGoalAmt) {
             vValue.setTextColor(Color.GREEN);
         }
         TextView tvValue = (TextView) findViewById(R.id.runBestGoal);
-        tvValue.setText(ChallengeDatabase.findRunPersonalBest(Login.UserId) + "/" + ChallengeDatabase.findRunPersonalGoal(Login.UserId));
-        if (ChallengeDatabase.findRunPersonalBest(Login.UserId) >= ChallengeDatabase.findRunPersonalGoal(Login.UserId)) {
+        tvValue.setText(personalRunRecord + "/" + runGoalAmt);
+        if (personalRunRecord >= runGoalAmt) {
             tvValue.setTextColor(Color.GREEN);
         }
-
     }
 
 }

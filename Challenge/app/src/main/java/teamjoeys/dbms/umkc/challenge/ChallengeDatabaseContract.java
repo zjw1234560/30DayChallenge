@@ -68,7 +68,7 @@ public final class ChallengeDatabaseContract {
                         "\tworkoutgoal_id integer primary key autoincrement,\n" +
                         "\tuser_id integer not null,\n" +
                         "\tworkoutgoal_time integer not null,\n" +
-                        "\tworkoutgoal_distance integer not null,\n" +
+                        "\tworkoutgoal_distance real not null,\n" +
                         "\tstartdate datetime not null,\n" +
                         "\tforeign key(user_id) references application_user(user_id)\n" +
                         ");";
@@ -108,6 +108,7 @@ public final class ChallengeDatabaseContract {
                         "\trun_session_id integer primary key not null autoincrement,\n" +
                         "\trun_goal_id integer not null,\n" +
                         "\trun_session_date datetime not null,\n" +
+                        "\trun_session_distance real,\n" +
                         "\tforeign key(run_goal_id) references run_workout_goal(workoutgoal_id)\n" +
                         ");";
 

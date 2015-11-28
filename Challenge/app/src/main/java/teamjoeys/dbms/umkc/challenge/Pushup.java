@@ -1,5 +1,6 @@
 package teamjoeys.dbms.umkc.challenge;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
@@ -17,8 +18,9 @@ import android.widget.TextView;
 
 public class Pushup extends ActionBarActivity implements View.OnClickListener {
 
-
     private int count = 0;
+    private ChallengeDatabase mDb;
+    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,10 @@ public class Pushup extends ActionBarActivity implements View.OnClickListener {
         L_button.setOnClickListener(this);
         View F_button = findViewById(R.id.finish_button);
         F_button.setOnClickListener(this);
+
+        mContext = this;
+        mDb = new ChallengeDatabase(mContext);
+
         update_count();
         update_goal();
     }
@@ -52,15 +58,19 @@ public class Pushup extends ActionBarActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.pushup_button) {
-                count+=1;
-                update_count();
-            }
-        if (v.getId() == R.id.finish_button){
-                //send info for push up session to database
-                Intent intent = new Intent(this, Challenge_Menu.class);
-                startActivity(intent);
-            }
+        if (v.getId() == R.id.pushup_button)
+        {
+            count+=1;
+            update_count();
+        }
+        if (v.getId() == R.id.finish_button)
+        {
+            //send info for push up session to database
+
+            mDb.AddPushupSession(Challenge_Menu.latestPushupGoalId, count);
+            Intent intent = new Intent(this, Challenge_Menu.class);
+            startActivity(intent);
+        }
     }
 
 
@@ -71,8 +81,8 @@ public class Pushup extends ActionBarActivity implements View.OnClickListener {
 
     private void update_goal(){
         TextView t = (TextView) findViewById(R.id.pu_goal);
-        //Get info from database on goal for the day
-        t.setText(Integer.toString(count));
+        int currentGoalAmt = Challenge_Menu.pushupGoalAmt;
+        t.setText(Integer.toString(currentGoalAmt));
     }
 }
 

@@ -17,6 +17,7 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
 
     private ChallengeDatabase mDb;
     private Context mContext;
+
     //this static field will be storing the current userId and used in other screens
     public static int UserId;
 
@@ -24,10 +25,11 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        View L_button = findViewById(R.id.login_exe);
-        L_button.setOnClickListener(this);
-        View C_button = findViewById(R.id.create_exe);
-        C_button.setOnClickListener(this);
+
+        View loginBtn = findViewById(R.id.login_exe);
+        loginBtn.setOnClickListener(this);
+        View createBtn = findViewById(R.id.create_exe);
+        createBtn.setOnClickListener(this);
 
         mContext = this;
         mDb = new ChallengeDatabase(mContext);
@@ -49,8 +51,8 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent intent = new Intent(this, About.class);
-            startActivity(intent);
+            Intent settingsIntent = new Intent(this, About.class);
+            startActivity(settingsIntent);
             return true;
         }
 
@@ -59,48 +61,53 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        //pass login information to server and get response if login should proceed
+        EditText email = (EditText) findViewById(R.id.email);
+        EditText password = (EditText) findViewById(R.id.password);
+        String user_email = email.getText().toString();
+        String user_password = password.getText().toString();
         switch (v.getId()) {
+            //pass login information to server and get response if login should proceed
             case R.id.login_exe: {
-                EditText email = (EditText) findViewById(R.id.email);
-                EditText password = (EditText) findViewById(R.id.password);
-                String user_email = email.getText().toString();
-                String user_password = password.getText().toString();
+                // Search DB for user credentials
                 int user_id = mDb.FindUser(user_email, user_password);
+
+                // If user not found in DB
                 if (user_id == -1) {
                     String text = "Account Info Incorrect";
+
                     // Use a toast message to tell user account info wasn't found
                     Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
                     toast.show();
-                    Intent intent = new Intent(this, Challenge_Menu.class);
-                    startActivity(intent);
                 } else {
                     //set UserId to current logged in user
                     UserId = user_id;
                     String text = "Login Successful!";
-                    // Use a toast message to tell user login was success
+
+                    // Use a toast message to tell user login was success, then go to main menu
                     Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
                     toast.show();
                     Intent intent = new Intent(this, Challenge_Menu.class);
                     startActivity(intent);
                 }
+                return;
             }
             case R.id.create_exe: {
-                EditText email = (EditText) findViewById(R.id.email);
-                EditText password = (EditText) findViewById(R.id.password);
-                //uncomment next line when we have the method implemented
-                //mDb.CreateUser(email, password);
-                //set UserId to current logged in user
-                String user_email = email.getText().toString();
-                String user_password = password.getText().toString();
-                int user_id = mDb.FindUser(user_email, user_password);
-                UserId = user_id;
-                String text = "Account Created!";
-                // Use a toast message to tell user account creation was successful
-                Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
-                toast.show();
-                Intent intent = new Intent(this, Challenge_Menu.class);
-                startActivity(intent);
+                int user_id_result = mDb.CreateUser(user_email, user_password);
+                if(user_id_result == -1) // If user can't be created
+                {
+                    String txtFail = "Cannot create account with those credentials.";
+                    Toast toastFail = Toast.makeText(this, txtFail, Toast.LENGTH_SHORT);
+                    toastFail.show();
+                }
+                else {
+                    UserId = user_id_result;
+                    String txtSuccess = "Account Created!";
+                    Toast toastSuccess = Toast.makeText(this, txtSuccess, Toast.LENGTH_SHORT);
+                    toastSuccess.show();
+                    Intent challengeMenuIntent = new Intent(this, Challenge_Menu.class);
+                    startActivity(challengeMenuIntent);
+                }
+                return;
             }
         }
     }
