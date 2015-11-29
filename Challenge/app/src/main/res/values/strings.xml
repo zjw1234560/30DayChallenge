@@ -5,10 +5,12 @@
         <string name="action_settings">About</string>
         <string name="title_activity_about">About</string>
 
-        <string name="about">The 30 day challenge app is an app that uses a push-up counter
-                             to test your fitness</string>
+        <string name="about">The 30 day challenge app is an app that creates goals for running and push-ups to motivate and encourage users!</string>
+    <string name="info">You have 30 days to reach your set fitness goals.</string>
+    <string name="credit">Developed by Hongcheng, Daniel, Xi, and Steven</string>
         <string name="login">Login</string>
     <string name="title_activity_login">Login</string>
+    <string name="begin">"Start by setting your goals"</string>
     <string name="title_activity_pushup">Push Up</string>
     <string name="pushup">Push Up</string>
     <string name="title_activity_challenge__menu">Challenge Menu</string>
@@ -17,6 +19,8 @@
     <string name="end">Finish</string>
     <string name="tutor">Push Up Tutorial</string>
     <string name="title_activity_pushup_tutorial">Pushup Tutorial</string>
+    <string name="num_p"># of Push-Ups</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_set__goals">Set Goals</string>
 </resources>

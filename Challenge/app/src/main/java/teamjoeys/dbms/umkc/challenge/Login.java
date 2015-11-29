@@ -104,8 +104,8 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
                     String txtSuccess = "Account Created!";
                     Toast toastSuccess = Toast.makeText(this, txtSuccess, Toast.LENGTH_SHORT);
                     toastSuccess.show();
-                    Intent challengeMenuIntent = new Intent(this, Challenge_Menu.class);
-                    startActivity(challengeMenuIntent);
+                    Intent setGoalIntent = new Intent(this, Set_Goals.class);
+                    startActivity(setGoalIntent);
                 }
                 return;
             }

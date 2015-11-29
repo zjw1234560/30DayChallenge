@@ -40,6 +40,10 @@
             android:name=".PacerRunActivity"
             android:label="@string/pacer" >
         </activity>
+        <activity
+            android:name=".Set_Goals"
+            android:label="@string/title_activity_set__goals" >
+        </activity>
     </application>
 
 </manifest>
