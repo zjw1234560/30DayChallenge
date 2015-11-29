@@ -113,7 +113,7 @@ public class Challenge_Menu extends ActionBarActivity implements View.OnClickLis
         if (runGoalId != -1)
         {
             latestRunGoalId = runGoalId;
-            runGoalAmt = mDb.GetRunGoalDistance(latestRunGoalId);
+            runGoalAmt = mDb.GetRunGoalAmt(latestRunGoalId);
 
             // Get personal run best from DB
             double runBest = mDb.GetBestRunSession(Login.UserId, latestRunGoalId);

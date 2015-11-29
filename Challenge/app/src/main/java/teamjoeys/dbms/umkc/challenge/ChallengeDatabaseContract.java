@@ -67,7 +67,7 @@ public final class ChallengeDatabaseContract {
                 "CREATE TABLE IF NOT EXISTS run_workout_goal(\n" +
                         "\tworkoutgoal_id integer primary key autoincrement,\n" +
                         "\tuser_id integer not null,\n" +
-                        "\tworkoutgoal_time real not null,\n" +
+                        "\tworkoutgoal_time integer not null,\n" +
                         "\tworkoutgoal_distance real not null,\n" +
                         "\tstartdate datetime not null,\n" +
                         "\tforeign key(user_id) references application_user(user_id)\n" +
@@ -109,7 +109,6 @@ public final class ChallengeDatabaseContract {
                         "\trun_goal_id integer not null,\n" +
                         "\trun_session_date datetime not null,\n" +
                         "\trun_session_distance real,\n" +
-                        "\trun_session_time real,\n" +
                         "\tforeign key(run_goal_id) references run_workout_goal(workoutgoal_id)\n" +
                         ");";
 

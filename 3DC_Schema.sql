@@ -15,7 +15,7 @@ create table pushup_workout_goal(
 create table run_workout_goal(
    	workoutgoal_id integer primary key autoincrement,
    	user_id integer not null,
-   	workoutgoal_time real not null,
+   	workoutgoal_time integer not null,
    	workoutgoal_distance real not null,
    	startdate datetime not null,
    	foreign key(user_id) references application_user(user_id)
@@ -34,7 +34,6 @@ create table run_session (
 	run_goal_id integer not null,
 	run_session_date datetime not null,
 	run_session_distance real,
-	run_session_time real,
 	foreign key(run_goal_id) references run_workout_goal(workoutgoal_id)
 );
 
