@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import android.database.sqlite.SQLiteStatement;
 import android.widget.EditText;
 
 /**
@@ -119,7 +120,10 @@ public class ChallengeDatabase {
         // SELECT MAX(s.numberofpushups)
         // FROM pushup_workout_goal g JOIN pushup_session s ON g.workoutgoal_id = s.pushup_goal_id
         // WHERE g.user_id = userId AND g.workoutgoal_id = pushupGoalId;
-        return -1;
+        final SQLiteStatement stmt = mDbHelper.compileStatement("SELECT MAX(s.numberofpushups) " +
+                "FROM pushup_workout_goal g JOIN pushup_session s ON g.workoutgoal_id = s.pushup_goal_id " +
+                "WHERE g.user_id = "+userId+" AND g.workoutgoal_id = " +pushupGoalId);
+        return (int) stmt.simpleQueryForLong();
     }
 
     public double GetRunGoalAmt(int runGoalId) {
