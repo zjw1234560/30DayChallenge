@@ -38,53 +38,46 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Personal Best/Push Up Goal:"
+        android:text="Push Up Goal:"
         android:id="@+id/pu_goal"
-        android:layout_marginTop="42dp"
-        android:layout_below="@+id/day"
-        android:layout_toStartOf="@+id/start_pacer"
+        android:layout_marginTop="44dp"
         android:textSize="17dp"
-        android:layout_toLeftOf="@+id/start_pacer" />
+        android:layout_below="@+id/day"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Personal Best/Running Goal:"
+        android:text="Running Goal:"
         android:id="@+id/push_goal"
-        android:layout_alignTop="@+id/pu_goal"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:textSize="17dp"
         android:textIsSelectable="true"
-        android:layout_toRightOf="@+id/start_pacer"
-        android:layout_toEndOf="@+id/start_pacer" />
+        android:layout_alignTop="@+id/pu_goal"
+        android:layout_toRightOf="@+id/start_pu"
+        android:layout_toEndOf="@+id/start_pu" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="0/0"
+        android:text="Not started"
         android:id="@+id/pushBestGoal"
-        android:layout_below="@+id/pu_goal"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="36dp"
-        android:layout_marginStart="36dp"
-        android:textSize="17dp" />
+        android:textSize="17dp"
+        android:layout_below="@+id/pu_goal"
+        android:layout_alignParentLeft="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="0/0"
+        android:text="Not started"
         android:id="@+id/runBestGoal"
-        android:layout_below="@+id/push_goal"
-        android:layout_alignLeft="@+id/push_goal"
-        android:layout_alignStart="@+id/push_goal"
-        android:layout_marginLeft="43dp"
-        android:layout_marginStart="43dp"
         android:textIsSelectable="false"
-        android:textSize="17dp" />
+        android:textSize="17dp"
+        android:layout_below="@+id/push_goal"
+        android:layout_toRightOf="@+id/start_pu" />
 
 </RelativeLayout>

@@ -7,8 +7,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 public class Set_Goals extends ActionBarActivity implements View.OnClickListener  {
+
+
+    public static String push_up_goal;
+    public static String run_distance;
+    public static String run_time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +50,13 @@ public class Set_Goals extends ActionBarActivity implements View.OnClickListener
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.To_Menu: {
-                //set goals in database
+                TextView dValue = (TextView) findViewById(R.id.mile_goal);
+                run_distance = dValue.getText().toString();
+                TextView tValue = (TextView) findViewById(R.id.time_goal);
+                run_time = tValue.getText().toString();
+                TextView vValue = (TextView) findViewById(R.id.push_goal);
+                push_up_goal = vValue.getText().toString();
+
                 Intent intent = new Intent(this, Challenge_Menu.class);
                 startActivity(intent);
             }

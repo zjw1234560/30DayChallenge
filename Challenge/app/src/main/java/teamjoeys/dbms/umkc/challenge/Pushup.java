@@ -81,8 +81,8 @@ public class Pushup extends ActionBarActivity implements View.OnClickListener {
 
     private void update_goal(){
         TextView t = (TextView) findViewById(R.id.pu_goal);
-        int currentGoalAmt = Challenge_Menu.pushupGoalAmt;
-        t.setText(Integer.toString(currentGoalAmt));
+        String currentGoalAmt = Set_Goals.push_up_goal;
+        t.setText(currentGoalAmt);
     }
 }
 

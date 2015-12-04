@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Chronometer;
 import android.os.SystemClock;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Timer;
@@ -36,6 +37,13 @@ public class PacerRunActivity extends ActionBarActivity implements View.OnClickL
         S_button.setOnClickListener(this);
         View F_button = findViewById(R.id.finish_button);
         F_button.setOnClickListener(this);
+
+        TextView tvValue = (TextView) findViewById(R.id.distance_goal);
+        tvValue.setText(Set_Goals.run_distance + " miles");
+        TextView vValue = (TextView) findViewById(R.id.time_v);
+        vValue.setText(Set_Goals.run_time + " minutes");
+        TextView dvValue = (TextView) findViewById(R.id.distance_count);
+        dvValue.setText("0 miles");
 
     }
 

@@ -89,6 +89,10 @@ public class Challenge_Menu extends ActionBarActivity implements View.OnClickLis
     }
 
     private void update_challenge() {
+        TextView vValue = (TextView) findViewById(R.id.pushBestGoal);
+        TextView tvValue = (TextView) findViewById(R.id.runBestGoal);
+        String pushUpProgress=null;
+        String runningProgress=null;
         //read in the data from database about which progress/goals made in challenge
 
         // Get latest pushup goal, store id
@@ -103,10 +107,11 @@ public class Challenge_Menu extends ActionBarActivity implements View.OnClickLis
             if (pushupBest != -1)
             {
                 personalPushupRecord = pushupBest;
+                if (personalPushupRecord >= pushupGoalAmt) {
+                    vValue.setTextColor(Color.GREEN);
+                }
+                pushUpProgress = personalPushupRecord + "/" + pushupGoalAmt;
             }
-        }
-        else {
-            // Set text to 'Not Started'
         }
         // Get latest run goal, store id
         int runGoalId = mDb.GetLatestRunGoal(Login.UserId);
@@ -120,22 +125,17 @@ public class Challenge_Menu extends ActionBarActivity implements View.OnClickLis
             if (runBest != -1)
             {
                 personalRunRecord = runBest;
+
+                if (personalRunRecord >= runGoalAmt) {
+                    tvValue.setTextColor(Color.GREEN);
+                }
+                runningProgress = personalRunRecord + "/" + runGoalAmt;
             }
         }
-        else {
-            // Set run goal text to 'Not Started'
-        }
 
-        TextView vValue = (TextView) findViewById(R.id.pushBestGoal);
-        vValue.setText(personalPushupRecord + "/" + pushupGoalAmt);
-        if (personalPushupRecord >= pushupGoalAmt) {
-            vValue.setTextColor(Color.GREEN);
-        }
-        TextView tvValue = (TextView) findViewById(R.id.runBestGoal);
-        tvValue.setText(personalRunRecord + "/" + runGoalAmt);
-        if (personalRunRecord >= runGoalAmt) {
-            tvValue.setTextColor(Color.GREEN);
-        }
+        vValue.setText(pushUpProgress);
+        tvValue.setText(runningProgress);
+
     }
 
 }
